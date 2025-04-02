@@ -5,7 +5,7 @@ document.getElementById("errorForm").addEventListener("submit", function(e) {
     var correct = document.getElementById("correct").value;
     var email = document.getElementById("email").value || "contact@" + url.split('/')[2]; // Fallback email
 
-    fetch("https://script.google.com/macros/s/AKfycbyxdt34God14nQk7PCxB_1G38oMa_fA1LVVBisOuQIN9BmiFWKaLQXYNIYhbxuHfFT8/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbwgV4jekr23wytLzdfu9e7pBDwf1byBR3Gjxi9M7KstX2HwgJ5u6JKkM5AqM-5k5K8/exec", {
         method: "POST",
         body: JSON.stringify({ url: url, wrong: wrong, correct: correct, email: email }),
         headers: { "Content-Type": "application/json" }

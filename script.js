@@ -9,7 +9,7 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     const data = { url, wrong, correct, email };
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwgV4jekr23wytLzdfu9e7pBDwf1byBR3Gjxi9M7KstX2HwgJ5u6JKkM5AqM-5k5K8/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzt4bv03Gtm15hQ-zrKAqiAVnJvebJ0KqocRugptvuC7fBWHla4RxkA0OFw3_HhCd4/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixTheWeb - Report Errors</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 500px; }
+        label { display: block; margin: 10px 0 5px; }
+        input, textarea { width: 100%; padding: 8px; }
+        button { padding: 10px 20px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+        .monetize { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>FixTheWeb</h1>
+    <p>Report errors on websites to keep the web accurate!</p>
+    <form id="errorForm">
+        <label for="url">Website URL:</label>
+        <input type="url" id="url" required placeholder="https://example.com">
+        <label for="wrong">Incorrect Info:</label>
+        <textarea id="wrong" required placeholder="Aadit Palicha is 22"></textarea>
+        <label for="correct">Correct Info:</label>
+        <textarea id="correct" required placeholder="Aadit Palicha is 23"></textarea>
+        <label for="email">Site Contact Email (optional):</label>
+        <input type="email" id="email" placeholder="contact@example.com">
+        <button type="submit">Submit Correction</button>
+    </form>
+    <div class="monetize">
+        <p>Support us: <a href="YOUR_PAYPAL_DONATE_LINK" target="_blank">Donate via PayPal</a></p>
+        <p>Check facts with <a href="YOUR_AFFILIATE_LINK" target="_blank">Biography.com</a> (affiliate link)</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

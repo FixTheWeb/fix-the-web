@@ -9,13 +9,13 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     const data = { url, wrong, correct, email };
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbzt4bV03GTm5h0-zrkajavnovue_FiX-the-web/1', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbz1vwuLE-nzUcP7a0wJjtvk8NOpOh1sPOiDeoi1Q_OgHSrH4C1pheLoC86U4FNStA/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-            mode: 'no-cors' // Use no-cors to bypass CORS issue
+            mode: 'cors' // Use no-cors to bypass CORS issue
         });
 
         // Since mode is 'no-cors', we can't read the response status

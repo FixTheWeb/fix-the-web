@@ -1,4 +1,4 @@
-document.getElementById('errorForm').addEventListener('submit', async function(event) {
+document.getElementById('errorForm').addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const url = document.getElementById('url').value;
@@ -9,18 +9,21 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     const data = { url, wrong, correct, email };
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbz1vwuLE-nzUcP7a0wJjtvk8NOpOh1sPOiDeoi1Q_OgHSrH4C1pheLoC86U4FNStA/exec', {
+        const response = await fetch('https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_URL/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-            mode: 'cors' // Use no-cors to bypass CORS issue
         });
 
-        // Since mode is 'no-cors', we can't read the response status
-        alert('Correction submitted! Thanks for helping fix the web.');
-        document.getElementById('errorForm').reset();
+        const result = await response.json();
+        if (result.status === 'success') {
+            alert('Correction submitted! Thanks for helping fix the web.');
+            document.getElementById('errorForm').reset();
+        } else {
+            throw new Error(result.message || 'Unknown error');
+        }
     } catch (error) {
         console.error('Error:', error);
         alert('Error submitting correction. Please try again.');

@@ -15,7 +15,7 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-            mode: 'no-cors' // Use no-cors to bypass CORS issue
+            mode: 'cors' // Use no-cors to bypass CORS issue
         });
 
         // Since mode is 'no-cors', we can't read the response status

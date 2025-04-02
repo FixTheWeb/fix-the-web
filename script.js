@@ -9,21 +9,16 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     const data = { url, wrong, correct, email };
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxL5iA_OOKTrahMxUAUC5RJBze62MH_gL2ZGaDbvCThriyRmKagm0Ho_DfZb5nphg/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbw5vy93SbKakv0uRUX-ND_kx00SK6fz6lBqdyNA4kWdKiZQ1QXwMw5lFlQYXrbLkQ/exec', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
+            mode: 'no-cors' // ✅ Fixes CORS error but prevents response reading
         });
 
-        const result = await response.json();
-        if (result.status === 'success') {
-            alert('Correction submitted! Thanks for helping fix the web.');
-            document.getElementById('errorForm').reset();
-        } else {
-            alert('Error submitting correction: ' + result.message);
-        }
+        alert('Correction submitted! Thanks for helping fix the web.');
+        document.getElementById('errorForm').reset();
+
     } catch (error) {
         console.error('Error:', error);
         alert('Error submitting correction. Please try again.');

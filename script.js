@@ -1,4 +1,4 @@
-document.getElementById('errorForm').addEventListener('submit', async function (event) {
+document.getElementById('errorForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const url = document.getElementById('url').value;
@@ -9,7 +9,7 @@ document.getElementById('errorForm').addEventListener('submit', async function (
     const data = { url, wrong, correct, email };
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxrTIlNjN7GiP3Q5_PdPFCgU0GQNW_uovQwVDQsNEwZHDsdizjguqz4Eb8SpE_mO3o/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxL5iA_OOKTrahMxUAUC5RJBze62MH_gL2ZGaDbvCThriyRmKagm0Ho_DfZb5nphg/exec', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ document.getElementById('errorForm').addEventListener('submit', async function (
             alert('Correction submitted! Thanks for helping fix the web.');
             document.getElementById('errorForm').reset();
         } else {
-            throw new Error(result.message || 'Unknown error');
+            alert('Error submitting correction: ' + result.message);
         }
     } catch (error) {
         console.error('Error:', error);

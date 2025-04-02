@@ -4,46 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FixTheWeb - Report Errors</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        form { max-width: 500px; }
-        label { display: block; margin: 10px 0 5px; }
-        input, textarea { width: 100%; padding: 8px; }
-        button { padding: 10px 20px; background: #4CAF50; color: white; border: none; cursor: pointer; }
-        button:hover { background: #45a049; }
-        .monetize { margin-top: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
-        .disclosure { font-size: 0.9em; color: #555; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
-    </style>
+    
+    <!-- Google Font for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>FixTheWeb</h1>
-    <p>Report errors on websites to keep the web accurate!</p>
-    <form id="errorForm">
-        <label for="url">Page URL Where the Mistake Is Found:</label>
-        <input type="url" id="url" required placeholder="https://example.com">
-        <label for="wrong">Incorrect Info:</label>
-        <textarea id="wrong" required placeholder="The moon landing was in 1975"></textarea>
-        <label for="correct">Correct Info:</label>
-        <textarea id="correct" required placeholder="The moon landing was in 1969"></textarea>
-        <label for="email">Site Contact Email (optional):</label>
-        <input type="email" id="email" placeholder="contact@example.com">
-        <button type="submit">Submit Correction</button>
-    </form>
-    <div class="monetize">
-        <p><strong>Support Our Mission</strong></p>
-        <p>Help us keep the web accurate: <a href="YOUR_PAYPAL_DONATE_LINK" target="_blank">Donate via PayPal</a></p>
-        <p><strong>Recommended Books for Fact-Checkers</strong></p>
-        <ul>
-            <li><a href="https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555?tag=fixtheweb21-20" target="_blank">Thinking, Fast and Slow</a> - Explore cognitive biases and improve decision-making to combat misinformation.</li>
-            <li><a href="https://www.amazon.com/Art-Thinking-Clearly-Rolf-Dobelli/dp/0062219693?tag=fixtheweb21-20" target="_blank">The Art of Thinking Clearly</a> - Understand cognitive biases that lead to misinformation.</li>
-            <li><a href="https://www.amazon.com/This-Not-Propaganda-Adventures-Against/dp/1541762118?tag=fixtheweb21-20" target="_blank">This Is Not Propaganda</a> - Explore the global war on truth and disinformation.</li>
-            <li><a href="https://www.amazon.com/Misinformation-Age-False-Beliefs-Spread/dp/0300234015?tag=fixtheweb21-20" target="_blank">The Misinformation Age</a> - Discover why false beliefs persist online.</li>
-            <li><a href="https://www.amazon.com/Craft-Research-Chicago-Writing-Publishing/dp/022623973X?tag=fixtheweb21-20" target="_blank">The Craft of Research</a> - Master research skills to verify facts accurately.</li>
-        </ul>
-        <p class="disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
+    <div class="container">
+        <h1 class="fade-in">🚀 FixTheWeb</h1>
+        <p class="fade-in">Help keep the web accurate! Report errors on websites below.</p>
+
+        <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
+
+        <form id="errorForm" class="fade-in">
+            <label for="url">🔗 Paste the URL of the webpage with the error:</label>
+            <input type="url" id="url" required placeholder="https://example.com">
+
+            <label for="wrong">❌ Incorrect Information:</label>
+            <textarea id="wrong" required placeholder="The moon landing was in 1975"></textarea>
+
+            <label for="correct">✅ Correct Information:</label>
+            <textarea id="correct" required placeholder="The moon landing was in 1969"></textarea>
+
+            <label for="email">📧 Site Contact Email (optional):</label>
+            <input type="email" id="email" placeholder="contact@example.com">
+
+            <button type="submit">📩 Submit Correction</button>
+        </form>
+
+        <div class="monetize fade-in">
+            <p><strong>Support Our Mission</strong></p>
+            <p>Help us keep the web accurate: <a href="YOUR_PAYPAL_DONATE_LINK" target="_blank">Donate via PayPal</a></p>
+
+            <p><strong>Recommended Books for Fact-Checkers</strong></p>
+            <ul>
+                <li><a href="https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555?tag=fixtheweb21-20" target="_blank">Thinking, Fast and Slow</a> - Explore cognitive biases and improve decision-making.</li>
+                <li><a href="https://www.amazon.com/Art-Thinking-Clearly-Rolf-Dobelli/dp/0062219693?tag=fixtheweb21-20" target="_blank">The Art of Thinking Clearly</a> - Understand cognitive biases leading to misinformation.</li>
+                <li><a href="https://www.amazon.com/This-Not-Propaganda-Adventures-Against/dp/1541762118?tag=fixtheweb21-20" target="_blank">This Is Not Propaganda</a> - Explore the global war on truth.</li>
+                <li><a href="https://www.amazon.com/Misinformation-Age-False-Beliefs-Spread/dp/0300234015?tag=fixtheweb21-20" target="_blank">The Misinformation Age</a> - Discover why false beliefs persist online.</li>
+                <li><a href="https://www.amazon.com/Craft-Research-Chicago-Writing-Publishing/dp/022623973X?tag=fixtheweb21-20" target="_blank">The Craft of Research</a> - Master research skills to verify facts accurately.</li>
+            </ul>
+            <p class="disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

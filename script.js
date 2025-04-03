@@ -6,9 +6,9 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     const correct = document.getElementById('correct').value;
     const email = document.getElementById('email').value;
 
-    // Client-side Validation (Example)
+    // Client-side Validation
     if (!url || !wrong || !correct) {
-        alert('Please fill in all required fields.');
+        displayFeedback('Please fill in all required fields.', 'error');
         return;
     }
 
@@ -22,53 +22,52 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     document.getElementById('errorForm').appendChild(loadingMessage);
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyhOAtd4rFfi16RKWIJyBqyheLL8Pqwsw-Cik5ORF81GXPQR-EQk7JwzlCt67UBag/exec', { // Replace with your URL
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyhOAtd4rFfi16RKWIJyBqyheLL8Pqwsw-Cik5ORF81GXPQR-EQk7JwzlCt67UBag/exec', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
-            // Remove 'mode: 'no-cors' if possible
         });
 
         // Remove loading indicator
         loadingMessage.remove();
 
-        // Check response if you removed 'no-cors'
         if (response.ok) {
-            // Success message with HTML
-            const successMessage = document.createElement('div');
-            successMessage.textContent = 'Correction submitted! Thanks for helping fix the web.';
-            successMessage.style.backgroundColor = '#00ffcc';
-            successMessage.style.padding = '10px';
-            successMessage.style.marginTop = '10px';
-            document.getElementById('errorForm').appendChild(successMessage);
+            const responseData = await response.json(); // Parse JSON response
 
-            document.getElementById('errorForm').reset();
+            if (responseData && responseData.status === 'success') {
+                displayFeedback('Correction submitted! Thanks for helping fix the web.', 'success');
+                document.getElementById('errorForm').reset();
+            } else if (responseData && responseData.status === 'error') {
+                displayFeedback('Error submitting correction. (Google Apps Script error: ' + responseData.message + ')', 'error');
+                console.error('Google Apps Script Error:', responseData.message);
+            } else {
+                 displayFeedback('Error with google app script, unhandled response', 'error');
+                 console.error('google app script unhandled response', responseData);
+            }
+
         } else {
-            // Error message with HTML
-            const errorMessage = document.createElement('div');
-            errorMessage.textContent = 'Error submitting correction. Please try again.';
-            errorMessage.style.backgroundColor = '#ffcccc';
-            errorMessage.style.padding = '10px';
-            errorMessage.style.marginTop = '10px';
-            document.getElementById('errorForm').appendChild(errorMessage);
+            displayFeedback('Error submitting correction. (Network error)', 'error');
+            console.error('Network Error:', response.status, response.statusText);
         }
 
     } catch (error) {
-        console.error('Error:', error);
-        // Error message with HTML
-        const errorMessage = document.createElement('div');
-        errorMessage.textContent = 'Error submitting correction. Please try again.';
-        errorMessage.style.backgroundColor = '#ffcccc';
-        errorMessage.style.padding = '10px';
-        errorMessage.style.marginTop = '10px';
-        document.getElementById('errorForm').appendChild(errorMessage);
-
-        // Remove loading indicator if it exists
-        loadingMessage.remove();
+        console.error('Fetch Error:', error);
+        displayFeedback('An unexpected error occurred. Please try again.', 'error');
+        loadingMessage.remove(); // Remove loading indicator on error
     }
 });
 
-// Add a reset button functionality
+function displayFeedback(message, type) {
+    const feedbackDiv = document.getElementById('feedback');
+    if(feedbackDiv){
+        feedbackDiv.textContent = message;
+        feedbackDiv.className = type; // 'success' or 'error' class for styling
+    } else {
+        console.error("Feedback div not found");
+    }
+}
+
+// Reset button functionality
 document.getElementById('resetButton').addEventListener('click', function() {
     document.getElementById('errorForm').reset();
 });

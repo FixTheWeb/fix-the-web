@@ -38,52 +38,26 @@
             text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
             animation: neonGlow 1.5s ease-in-out infinite alternate;
         }
-        p {
-            font-size: 1.1em;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-        }
-        form, .monetize {
+        form {
             max-width: 600px;
             width: 90%;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            margin: 120px 0 20px;
+            margin-top: 100px;
             transition: transform 0.3s, box-shadow 0.3s;
             animation: fadeIn 1s ease-out;
         }
-        form:hover, .monetize:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        }
-        label {
-            font-weight: bold;
-            margin: 15px 0 8px;
-            display: block;
-            color: #00ffcc;
-        }
         input, textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
             color: #e0e0e0;
-            transition: border-color 0.3s;
-        }
-        input:focus, textarea:focus {
-            border-color: #00ffcc;
-            outline: none;
-            box-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
-        }
-        textarea {
-            min-height: 100px;
-            resize: vertical;
         }
         button {
             width: 100%;
@@ -91,55 +65,44 @@
             background: #00ffcc;
             color: #1a1a2e;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 255, 204, 0.4);
         }
         button:hover {
             background: #00e6b8;
             box-shadow: 0 4px 12px rgba(0, 255, 204, 0.6);
-            transform: translateY(-2px);
+            transform: scale(1.05);
+        }
+        .monetize {
+            margin-top: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
         }
         .monetize a {
             color: #00ffcc;
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
         }
         .monetize a:hover {
-            color: #00e6b8;
-            text-decoration: underline;
-        }
-        .monetize a[href*="paypal"] {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #ff007a;
-            color: white;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(255, 0, 122, 0.4);
-        }
-        .monetize a[href*="paypal"]:hover {
-            background: #e6006b;
-            text-decoration: none;
+            color: #ff9900;
         }
         .monetize ul {
             list-style: none;
-            padding-left: 0;
+            padding: 0;
         }
         .monetize li {
-            padding-left: 20px;
-            position: relative;
             margin-bottom: 10px;
-        }
-        .monetize li:before {
-            content: "➜";
-            position: absolute;
-            left: 0;
-            color: #ff007a;
+            font-size: 1.1em;
         }
         .disclosure {
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: #b0b0b0;
             margin-top: 15px;
         }
@@ -148,40 +111,6 @@
             font-size: 0.9em;
             color: #b0b0b0;
             margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        @keyframes neonGlow {
-            from {
-                text-shadow: 0 0 5px rgba(0, 255, 204, 0.5), 0 0 10px rgba(0, 255, 204, 0.7);
-            }
-            to {
-                text-shadow: 0 0 10px rgba(0, 255, 204, 0.7), 0 0 20px rgba(0, 255, 204, 0.9);
-            }
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @media (max-width: 600px) {
-            form, .monetize {
-                padding: 15px;
-                width: 95%;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            input, textarea, button {
-                font-size: 1em;
-            }
-            .monetize ul {
-                padding-left: 10px;
-            }
         }
     </style>
 </head>
@@ -190,6 +119,7 @@
         <h1>FixTheWeb</h1>
         <p>Report errors to keep the web accurate!</p>
     </header>
+    
     <form id="errorForm">
         <label for="url">Website URL:</label>
         <input type="url" id="url" required placeholder="https://example.com">
@@ -201,6 +131,7 @@
         <input type="email" id="email" placeholder="contact@example.com">
         <button type="submit">Submit Correction</button>
     </form>
+
     <div class="monetize">
         <p><strong>Support Our Mission</strong></p>
         <p>Help us: <a href="YOUR_PAYPAL_DONATE_LINK" target="_blank">Donate via PayPal</a></p>
@@ -214,9 +145,9 @@
         </ul>
         <p class="disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
     </div>
+
     <footer>
         <p>© 2025 FixTheWeb. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>

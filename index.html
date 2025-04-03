@@ -6,8 +6,173 @@
     <title>FixTheWeb - Report Misinformation</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Your CSS styles remain here (same as before) */
-        /* ... */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9); /* Transparent white */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            color: #2c3e50; /* Darker blue-gray */
+        }
+
+        header p {
+            color: #777;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            margin-bottom: 20px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #3498db; /* Blue on focus */
+            outline: none;
+        }
+
+        textarea {
+            min-height: 150px;
+        }
+
+        .submit-btn, .reset-btn, .donate-btn, .guide-link {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            background-color: #3498db; /* Blue */
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            background-color: #e74c3c; /* Red */
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .donate-btn {
+            background-color: #27ae60; /* Green */
+            color: white;
+        }
+
+        .donate-btn:hover {
+            background-color: #219653;
+            transform: translateY(-2px);
+        }
+
+        .guide-link {
+            background-color: #f39c12; /* Orange */
+            color: white;
+        }
+
+        .guide-link:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+        }
+
+        .book-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .book-list li {
+            margin-bottom: 10px;
+        }
+
+        .book-list a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .book-list a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #f0f0f0;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Animations */
+        section {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -22,7 +187,25 @@
             <div class="container">
                 <h2>Report Misinformation</h2>
                 <form id="errorForm">
-                    </form>
+                    <div class="form-group">
+                        <label for="url">Website URL</label>
+                        <input type="url" id="url" name="url" placeholder="https://example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="wrong">Incorrect Information</label>
+                        <textarea id="wrong" name="wrong" placeholder="Describe the incorrect information..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="correct">Correct Information</label>
+                        <textarea id="correct" name="correct" placeholder="Provide the correct information..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Contact Email (Optional)</label>
+                        <input type="email" id="email" name="email" placeholder="contact@example.com">
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Report</button>
+                    <button type="button" class="reset-btn" id="resetButton">Reset</button>
+                </form>
             </div>
         </section>
         <section class="resources">
@@ -40,6 +223,7 @@
                     <li><a href="https://www.amazon.com/This-Not-Propaganda-Adventures-Against/dp/1541762118?tag=fixtheweb21-20" target="_blank">This Is Not Propaganda</a> - Explore the war on truth.</li>
                     <li><a href="https://www.amazon.com/Misinformation-Age-False-Beliefs-Spread/dp/0300234015?tag=fixtheweb21-20" target="_blank">The Misinformation Age</a> - Understand why false beliefs persist.</li>
                     <li><a href="https://www.amazon.com/Craft-Research-Chicago-Writing-Publishing/dp/022623973X?tag=fixtheweb21-20" target="_blank">The Craft of Research</a> - Master fact-checking skills.</li>
+                </ul>
                 </ul>
                 <p class="disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
             </div>

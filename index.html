@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,13 +10,30 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 20px;
-            background: #f4f4f4;
+            background: linear-gradient(to bottom, #f4f4f4, #e8ecef);
             display: flex;
             flex-direction: column;
             align-items: center;
+            line-height: 1.6;
         }
-        h1 { font-size: 2.5em; color: #333; }
-        p { font-size: 1.1em; color: #666; }
+        header {
+            position: sticky;
+            top: 0;
+            background: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #222;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+        }
         form, .monetize {
             max-width: 600px;
             width: 100%;
@@ -25,8 +42,17 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             margin-bottom: 20px;
+            transition: box-shadow 0.3s, transform 0.3s;
         }
-        label { font-weight: bold; margin: 15px 0 5px; display: block; }
+        form:hover, .monetize:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        label {
+            font-weight: bold;
+            margin: 15px 0 8px;
+            display: block;
+        }
         input, textarea {
             width: 100%;
             padding: 10px;
@@ -34,7 +60,15 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        textarea { min-height: 100px; resize: vertical; }
+        input:focus, textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
         button {
             width: 100%;
             padding: 12px;
@@ -43,21 +77,78 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        button:hover { background: #45a049; }
-        .monetize a { color: #1a73e8; text-decoration: none; }
-        .monetize a:hover { text-decoration: underline; }
-        .disclosure { font-size: 0.85em; color: #777; margin-top: 15px; }
+        button:hover {
+            background: #45a049;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+        .monetize a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .monetize a:hover {
+            text-decoration: underline;
+        }
+        .monetize a[href*="paypal"] {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #0070ba;
+            color: white;
+            border-radius: 4px;
+        }
+        .monetize a[href*="paypal"]:hover {
+            background: #005ea6;
+            text-decoration: none;
+        }
+        .monetize ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .monetize li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .monetize li:before {
+            content: "➜";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+        }
+        .disclosure {
+            font-size: 0.85em;
+            color: #777;
+            margin-top: 15px;
+        }
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 20px;
+        }
         @media (max-width: 600px) {
-            form, .monetize { padding: 15px; }
-            h1 { font-size: 2em; }
+            form, .monetize {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            input, textarea, button {
+                font-size: 1em;
+            }
+            .monetize ul {
+                padding-left: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>FixTheWeb</h1>
-    <p>Report errors to keep the web accurate!</p>
+    <header>
+        <h1>FixTheWeb</h1>
+        <p>Report errors to keep the web accurate!</p>
+    </header>
     <form id="errorForm">
         <label for="url">Website URL:</label>
         <input type="url" id="url" required placeholder="https://example.com">
@@ -74,14 +165,17 @@
         <p>Help us: <a href="YOUR_PAYPAL_DONATE_LINK" target="_blank">Donate via PayPal</a></p>
         <p><strong>Recommended Books</strong></p>
         <ul>
-            <li><a href="https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555?tag=fixtheweb21-20" target="_blank">Thinking, Fast and Slow</a> - Improve decision-making to combat misinformation.</li>
-            <li><a href="https://www.amazon.com/Art-Thinking-Clearly-Rolf-Dobelli/dp/0062219693?tag=fixtheweb21-20" target="_blank">The Art of Thinking Clearly</a> - Recognize cognitive biases leading to misinformation.</li>
-            <li><a href="https://www.amazon.com/This-Not-Propaganda-Adventures-Against/dp/1541762118?tag=fixtheweb21-20" target="_blank">This Is Not Propaganda</a> - Explore the global war on truth and disinformation.</li>
-            <li><a href="https://www.amazon.com/Misinformation-Age-False-Beliefs-Spread/dp/0300234015?tag=fixtheweb21-20" target="_blank">The Misinformation Age</a> - Discover why false beliefs persist online.</li>
-            <li><a href="https://www.amazon.com/Craft-Research-Chicago-Writing-Publishing/dp/022623973X?tag=fixtheweb21-20" target="_blank">The Craft of Research</a> - Master research skills to verify facts accurately.</li>
+            <li><strong><a href="https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555?tag=fixtheweb21-20" target="_blank">Thinking, Fast and Slow</a></strong> - Improve decision-making to combat misinformation.</li>
+            <li><strong><a href="https://www.amazon.com/Art-Thinking-Clearly-Rolf-Dobelli/dp/0062219693?tag=fixtheweb21-20" target="_blank">The Art of Thinking Clearly</a></strong> - Recognize cognitive biases leading to misinformation.</li>
+            <li><strong><a href="https://www.amazon.com/This-Not-Propaganda-Adventures-Against/dp/1541762118?tag=fixtheweb21-20" target="_blank">This Is Not Propaganda</a></strong> - Explore the global war on truth and disinformation.</li>
+            <li><strong><a href="https://www.amazon.com/Misinformation-Age-False-Beliefs-Spread/dp/0300234015?tag=fixtheweb21-20" target="_blank">The Misinformation Age</a></strong> - Discover why false beliefs persist online.</li>
+            <li><strong><a href="https://www.amazon.com/Craft-Research-Chicago-Writing-Publishing/dp/022623973X?tag=fixtheweb21-20" target="_blank">The Craft of Research</a></strong> - Master research skills to verify facts accurately.</li>
         </ul>
         <p class="disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
     </div>
+    <footer>
+        <p>© 2025 FixTheWeb. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

@@ -17,6 +17,8 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     // Show loading indicator
     const loadingMessage = document.createElement('div');
     loadingMessage.textContent = 'Submitting...';
+    loadingMessage.style.textAlign = 'center';
+    loadingMessage.style.marginTop = '20px';
     document.getElementById('errorForm').appendChild(loadingMessage);
 
     try {

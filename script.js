@@ -22,7 +22,7 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     document.getElementById('errorForm').appendChild(loadingMessage);
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyhOAtd4rFfi16RKWIJyBqyheLL8Pqwsw-Cik5ORF81GXPQR-EQk7JwzlCt67UBag/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxBspm9Z0u_TfeHjciK92iXUZfzosl5ZDicVqqUkx1aWfXl493wDwavnQloIaaWRRI/exec', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)

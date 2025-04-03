@@ -59,21 +59,33 @@
         form, .monetize {
             max-width: 600px;
             width: 90%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
             padding: 30px;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
-            margin: 150px 0 30px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4), inset 0 0 10px rgba(0, 255, 204, 0.2);
+            margin: 180px 0 30px;
             transition: transform 0.3s, box-shadow 0.3s;
             animation: fadeIn 1s ease-out;
             position: relative;
             z-index: 1;
         }
+        form::before, .monetize::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #00ffcc, #ff007a);
+            z-index: -1;
+        }
         form:hover, .monetize:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 255, 204, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 255, 204, 0.5);
         }
         label {
             font-weight: bold;
@@ -138,9 +150,27 @@
             color: white;
             border-radius: 4px;
             box-shadow: 0 2px 8px rgba(255, 0, 122, 0.4);
+            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
         }
         .monetize a[href*="paypal"]:hover {
             background: #e6006b;
+            box-shadow: 0 4px 12px rgba(255, 0, 122, 0.6);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        .monetize a[href*="docs.google.com"] {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #00ffcc, #ff007a);
+            color: #0f172a;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 255, 204, 0.4);
+            transition: box-shadow 0.3s, transform 0.3s;
+            animation: pulse 2s infinite;
+        }
+        .monetize a[href*="docs.google.com"]:hover {
+            box-shadow: 0 4px 12px rgba(0, 255, 204, 0.6);
+            transform: translateY(-2px);
             text-decoration: none;
         }
         .monetize ul {
@@ -205,7 +235,7 @@
             form, .monetize {
                 padding: 20px;
                 width: 95%;
-                margin: 120px 0 20px;
+                margin: 140px 0 20px;
             }
             h1 {
                 font-size: 2em;
@@ -241,6 +271,7 @@
     <div class="monetize">
         <p><strong>Support Our Mission</strong></p>
         <p>Help us: <a href="YOUR_PAYPAL_DONATE_LINK" target="_blank">Donate via PayPal</a></p>
+        <p>Learn more: <a href="https://docs.google.com/document/d/1qev_UhtJUF_Wip6ERKqTQ7KxBFZ3t5EjXpIBmPcFGnA/view?usp=sharing" target="_blank">Misinformation Awareness Guide</a></p>
         <p><strong>Recommended Books</strong></p>
         <ul>
             <li><strong><a href="https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555?tag=fixtheweb21-20" target="_blank">Thinking, Fast and Slow</a></strong> - Improve decision-making to combat misinformation.</li>

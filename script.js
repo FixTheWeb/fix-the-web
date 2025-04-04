@@ -22,10 +22,15 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     document.getElementById('errorForm').appendChild(loadingMessage);
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbwzUH0eOlGSjIcC0ARAei5gSBb_VcoX8uvmfvxz9peTbNL_ZJktMrtP-BuwSD_8hnU/exec', {
+        // Fetch request to the Google Apps Script URL
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxEEpoUQnngxAaVNAby8jXcB9JmjQYc7SJMNxBbjLL1cWSUXbP9haU2pT6JFO0p-Yw/exec', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json', // Ensures that JSON response is processed
+            },
             body: JSON.stringify(data),
+            mode: 'cors', // Ensures CORS is handled
         });
 
         // Remove loading indicator
@@ -35,7 +40,7 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
 
         if (response.ok && responseData.status === 'success') {
             displayFeedback('Correction submitted! Thanks for helping fix the web.', 'success');
-            document.getElementById('errorForm').reset();
+            document.getElementById('errorForm').reset();  // Reset the form after successful submission
         } else {
             const errMsg = responseData?.message || 'Unexpected server response.';
             displayFeedback(`Error submitting correction. ${errMsg}`, 'error');
@@ -43,6 +48,7 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
         }
 
     } catch (error) {
+        // Remove loading indicator on error
         loadingMessage.remove();
         console.error('Fetch Error:', error);
         displayFeedback('An unexpected error occurred. Please try again.', 'error');
@@ -50,17 +56,20 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
 });
 
 function displayFeedback(message, type) {
-    const feedbackDiv = document.getElementById('feedback');
-    if (feedbackDiv) {
-        feedbackDiv.textContent = message;
-        feedbackDiv.className = type; // 'success' or 'error' class for styling
-    } else {
-        console.error("Feedback div not found");
+    // Create or find the feedback div to show success or error message
+    let feedbackDiv = document.getElementById('feedback');
+    if (!feedbackDiv) {
+        feedbackDiv = document.createElement('div');
+        feedbackDiv.id = 'feedback';
+        document.body.appendChild(feedbackDiv);  // Append it to the body if it doesn't exist
     }
+    
+    feedbackDiv.textContent = message;
+    feedbackDiv.className = type; // 'success' or 'error' class for styling
 }
 
 // Reset button functionality
 document.getElementById('resetButton').addEventListener('click', function () {
-    document.getElementById('errorForm').reset();
-    displayFeedback('', '');
+    document.getElementById('errorForm').reset(); // Reset form fields
+    displayFeedback('', '');  // Clear any feedback messages
 });

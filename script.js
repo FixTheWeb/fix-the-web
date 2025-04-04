@@ -21,7 +21,8 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
   document.getElementById('errorForm').appendChild(loadingMessage);
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbzaNyuysU2ZkQw1pJf9fND8kuzjaMcBjx5hNyY5R2YwUQJPZnqmmuIlQCyI-2NP6qVY/exec', {
+    console.log('Sending request via proxy...');
+    const response = await fetch('https://cors-anywhere.herokuapp.com/https://script.google.com/macros/s/AKfycbzaNyuysU2ZkQw1pJf9fND8kuzjaMcBjx5hNyY5R2YwUQJPZnqmmuIlQCyI-2NP6qVY/exec', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,9 +30,11 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
       body: JSON.stringify(data),
     });
 
+    console.log('Response received:', response);
     loadingMessage.remove();
 
     const responseData = await response.json();
+    console.log('Response data:', responseData);
 
     if (response.ok && responseData.status === 'success') {
       displayFeedback('Correction submitted! Thanks for helping fix the web.', 'success');

@@ -157,7 +157,8 @@
             animation: popIn 0.3s ease-out;
         }
 
-        #feedback.success { color: #2ecc71; }
+        #feedback.success {.ConcurrentModificationException: Exception occurred while trying to iterate over the collection. The collection was modified while iterating over it.
+ color: #2ecc71; }
         #feedback.error { color: #e74c3c; }
 
         .loading {
@@ -300,6 +301,89 @@
     <script src="script.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Handle form submission without fetch
+        document.getElementById('errorForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const url = document.getElementById('url').value.trim();
+            const wrong = document.getElementById('wrong').value.trim();
+            const correct = document.getElementById('correct').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            // Client-side Validation
+            if (!url || !wrong || !correct) {
+                displayFeedback('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const data = { url, wrong, correct, email };
+
+            // Show loading indicator
+            const loadingMessage = document.createElement('div');
+            loadingMessage.textContent = 'Submitting...';
+            loadingMessage.className = 'loading';
+            document.getElementById('errorForm').appendChild(loadingMessage);
+
+            // Create a hidden form to submit the data
+            const hiddenForm = document.createElement('form');
+            hiddenForm.method = 'POST';
+            hiddenForm.action = 'https://script.google.com/macros/s/AKfycbzbXZ7pm-rBus8QrM2IDqIiP0DcFf1soPmKkcjACoknfvhTJohPt3Hk5AK4rFRtnCiu/exec';
+            hiddenForm.style.display = 'none';
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'data';
+            input.value = JSON.stringify(data);
+            hiddenForm.appendChild(input);
+
+            document.body.appendChild(hiddenForm);
+
+            // Listen for the response using an iframe
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.name = 'hiddenIframe';
+            hiddenForm.target = 'hiddenIframe';
+            document.body.appendChild(iframe);
+
+            iframe.onload = function() {
+                loadingMessage.remove();
+                try {
+                    const responseText = iframe.contentWindow.document.body.innerText;
+                    const responseData = JSON.parse(responseText);
+                    if (responseData.status === 'success') {
+                        displayFeedback('Correction submitted! Thanks for helping fix the web.', 'success');
+                        document.getElementById('errorForm').reset();
+                    } else {
+                        const errMsg = responseData?.message || 'Unexpected server response.';
+                        displayFeedback(`Error submitting correction: ${errMsg}`, 'error');
+                    }
+                } catch (error) {
+                    displayFeedback('An unexpected error occurred. Please try again.', 'error');
+                }
+                document.body.removeChild(hiddenForm);
+                document.body.removeChild(iframe);
+            };
+
+            hiddenForm.submit();
+        });
+
+        function displayFeedback(message, type) {
+            let feedbackDiv = document.getElementById('feedback');
+            if (!feedbackDiv) {
+                feedbackDiv = document.createElement('div');
+                feedbackDiv.id = 'feedback';
+                document.getElementById('errorForm').appendChild(feedbackDiv);
+            }
+
+            feedbackDiv.textContent = message;
+            feedbackDiv.className = type;
+        }
+
+        document.getElementById('resetButton').addEventListener('click', function() {
+            document.getElementById('errorForm').reset();
+            displayFeedback('', '');
+        });
     </script>
 </body>
 </html>

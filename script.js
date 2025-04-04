@@ -1,12 +1,11 @@
 document.getElementById('errorForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const url = document.getElementById('url').value;
-    const wrong = document.getElementById('wrong').value;
-    const correct = document.getElementById('correct').value;
-    const email = document.getElementById('email').value;
+    const url = document.getElementById('url').value.trim();
+    const wrong = document.getElementById('wrong').value.trim();
+    const correct = document.getElementById('correct').value.trim();
+    const email = document.getElementById('email').value.trim();
 
-    // Client-side Validation
     if (!url || !wrong || !correct) {
         displayFeedback('Please fill in all required fields.', 'error');
         return;
@@ -14,7 +13,6 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
 
     const data = { url, wrong, correct, email };
 
-    // Show loading indicator
     const loadingMessage = document.createElement('div');
     loadingMessage.textContent = 'Submitting...';
     loadingMessage.style.textAlign = 'center';
@@ -22,52 +20,43 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     document.getElementById('errorForm').appendChild(loadingMessage);
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxBspm9Z0u_TfeHjciK92iXUZfzosl5ZDicVqqUkx1aWfXl493wDwavnQloIaaWRRI/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxxrN09QLNLP1VlUGRYhTLnEi1xPww964g4rw2uny369siH0daZFcA-DJlqcfHwqZ0/exec', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
-        // Remove loading indicator
         loadingMessage.remove();
 
-        if (response.ok) {
-            const responseData = await response.json(); // Parse JSON response
+        const responseData = await response.json();
 
-            if (responseData && responseData.status === 'success') {
-                displayFeedback('Correction submitted! Thanks for helping fix the web.', 'success');
-                document.getElementById('errorForm').reset();
-            } else if (responseData && responseData.status === 'error') {
-                displayFeedback('Error submitting correction. (Google Apps Script error: ' + responseData.message + ')', 'error');
-                console.error('Google Apps Script Error:', responseData.message);
-            } else {
-                 displayFeedback('Error with google app script, unhandled response', 'error');
-                 console.error('google app script unhandled response', responseData);
-            }
-
+        if (response.ok && responseData.status === 'success') {
+            displayFeedback('Correction submitted! Thanks for helping fix the web.', 'success');
+            document.getElementById('errorForm').reset();
         } else {
-            displayFeedback('Error submitting correction. (Network error)', 'error');
-            console.error('Network Error:', response.status, response.statusText);
+            const errMsg = responseData?.message || 'Unexpected server response.';
+            displayFeedback(`Error submitting correction. ${errMsg}`, 'error');
+            console.error('Backend Error:', responseData);
         }
 
     } catch (error) {
+        loadingMessage.remove();
         console.error('Fetch Error:', error);
         displayFeedback('An unexpected error occurred. Please try again.', 'error');
-        loadingMessage.remove(); // Remove loading indicator on error
     }
 });
 
 function displayFeedback(message, type) {
     const feedbackDiv = document.getElementById('feedback');
-    if(feedbackDiv){
+    if (feedbackDiv) {
         feedbackDiv.textContent = message;
-        feedbackDiv.className = type; // 'success' or 'error' class for styling
+        feedbackDiv.className = type; // 'success' or 'error'
     } else {
         console.error("Feedback div not found");
     }
 }
 
-// Reset button functionality
-document.getElementById('resetButton').addEventListener('click', function() {
+document.getElementById('resetButton').addEventListener('click', function () {
     document.getElementById('errorForm').reset();
+    displayFeedback('', '');
 });

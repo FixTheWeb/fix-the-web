@@ -6,23 +6,214 @@
     <title>FixTheWeb - Report Misinformation</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Existing CSS unchanged except for additions */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
             padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
+            background: linear-gradient(135deg, #ecf0f1 0%, #dfe6e9 100%); /* Subtle gradient */
+            color: #2c3e50;
+            line-height: 1.6;
+            animation: bgShift 10s infinite alternate ease-in-out; /* Background shift */
         }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px 0;
+            text-align: center;
+            animation: slideDown 0.8s ease-out; /* Header slides in */
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            color: #34495e;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Subtle text pop */
+        }
+
+        header p {
+            color: #777;
+            font-size: 1.2em;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        section h2 {
+            color: #34495e;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative; /* For glowing effect */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #34495e;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Glow effect */
+            background: #f8fbff; /* Light blue tint */
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical; /* Allow vertical resize only */
+        }
+
+        .submit-btn, .reset-btn, .donate-btn, .guide-link {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05) translateY(-2px); /* Bounce effect */
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+        }
+
+        .reset-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background-color: #c0392b;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+        }
+
+        .donate-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .donate-btn:hover {
+            background-color: #27ae60;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
+        }
+
+        .guide-link {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .guide-link:hover {
+            background-color: #d35400;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.4);
+        }
+
         #feedback {
             margin-top: 20px;
             text-align: center;
+            font-weight: 500;
+            animation: popIn 0.3s ease-out;
         }
+
         #feedback.success { color: #2ecc71; }
         #feedback.error { color: #e74c3c; }
+
+        .book-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .book-list li {
+            margin-bottom: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .book-list li:hover {
+            transform: translateX(10px); /* Slide effect on hover */
+        }
+
+        .book-list a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .book-list a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #f0f0f0;
+            border-top: 1px solid #ddd;
+            color: #777;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
         @media (max-width: 600px) {
             .container { padding: 10px; }
             .submit-btn, .reset-btn, .donate-btn, .guide-link {
@@ -59,12 +250,11 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Contact Email (Optional)</label>
-                        <input type="email" id="email" name="email" placeholder="contact@example.com" aria-describedby="email-desc">
-                        <small id="email-desc" class="sr-only">Optional: Provide an email if you want a response.</small>
+                        <input type="email" id="email" name="email" placeholder="contact@example.com">
                     </div>
                     <div id="feedback"></div>
                     <button type="submit" class="submit-btn">Submit Report</button>
-                    <button type="button" class="reset-btn" id="resetButton" aria-label="Reset form">Reset</button>
+                    <button type="button" class="reset-btn" id="resetButton">Reset</button>
                 </form>
             </div>
         </section>

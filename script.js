@@ -6,6 +6,7 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     const correct = document.getElementById('correct').value.trim();
     const email = document.getElementById('email').value.trim();
 
+    // Client-side Validation
     if (!url || !wrong || !correct) {
         displayFeedback('Please fill in all required fields.', 'error');
         return;
@@ -13,6 +14,7 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
 
     const data = { url, wrong, correct, email };
 
+    // Show loading indicator
     const loadingMessage = document.createElement('div');
     loadingMessage.textContent = 'Submitting...';
     loadingMessage.style.textAlign = 'center';
@@ -20,12 +22,13 @@ document.getElementById('errorForm').addEventListener('submit', async function(e
     document.getElementById('errorForm').appendChild(loadingMessage);
 
     try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxxrN09QLNLP1VlUGRYhTLnEi1xPww964g4rw2uny369siH0daZFcA-DJlqcfHwqZ0/exec', {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbwzUH0eOlGSjIcC0ARAei5gSBb_VcoX8uvmfvxz9peTbNL_ZJktMrtP-BuwSD_8hnU/exec', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         });
 
+        // Remove loading indicator
         loadingMessage.remove();
 
         const responseData = await response.json();
@@ -50,12 +53,13 @@ function displayFeedback(message, type) {
     const feedbackDiv = document.getElementById('feedback');
     if (feedbackDiv) {
         feedbackDiv.textContent = message;
-        feedbackDiv.className = type; // 'success' or 'error'
+        feedbackDiv.className = type; // 'success' or 'error' class for styling
     } else {
         console.error("Feedback div not found");
     }
 }
 
+// Reset button functionality
 document.getElementById('resetButton').addEventListener('click', function () {
     document.getElementById('errorForm').reset();
     displayFeedback('', '');
